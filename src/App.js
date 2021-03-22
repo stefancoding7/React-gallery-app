@@ -4,19 +4,31 @@ import './style/css/index.css';
 import apiKey from './config';
 import Form from './components/Form';
 import Photo from './components/Photo';
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from 'react-router-dom'
+
 
 class App extends Component {
 
     state = {
       data: [],
+      url: '/',
       loading: true
     }
 
-    searchApi(query) {
+    componentDidMount() {
+      this.searchApi()
+    }
+  
+    searchApi = (query) => {
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
         .then(response => {
             this.setState({ 
               data: response.data.photos.photo,
+              url: `/${query}`,
               loading: false
             })
         })
@@ -28,12 +40,18 @@ class App extends Component {
     }
     
     
+    
     render() {
         return (
-         <div>
-              <Form />
-              <Photo />
-         </div>
+          <BrowserRouter>
+              <div className="container">
+                <Form search={this.searchApi}/>
+                
+                  <Route path="/:url" render={ () => <Photo data={this.state.data}/> } />
+                
+              </div>
+          </BrowserRouter>
+        
             
         )
     }
