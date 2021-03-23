@@ -4,11 +4,13 @@ import './style/css/index.css';
 import apiKey from './config';
 import Form from './components/Form';
 import Photo from './components/Photo';
+import Nav from './components/Nav';
 import {
   BrowserRouter,
   Route,
-  Switch
-} from 'react-router-dom'
+  Switch,
+  useHistory
+} from 'react-router-dom';
 
 
 class App extends Component {
@@ -46,8 +48,10 @@ class App extends Component {
           <BrowserRouter>
               <div className="container">
                 <Form search={this.searchApi}/>
+                <Nav  search={this.props.search}/>
+                <Route exact path="/" render={ () => <Photo data={this.state.data}/> } />
                 
-                  <Route path="/:url" render={ () => <Photo data={this.state.data}/> } />
+                <Route path="/:urlquery" render={() => <Photo data={this.state.data} />  } />
                 
               </div>
           </BrowserRouter>

@@ -2,9 +2,10 @@ import React from 'react';
 import NotFound from './NotFound';
 import Image from './Img';
 
+
 const Photo = (props) => {
     
-
+    
     const datas = props.data;
     let photos;
     photos = datas.map(data => 
