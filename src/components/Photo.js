@@ -14,11 +14,11 @@ const Photo = (props) => {
     
     return (
         <div className="photo-container">
-        <h2>Results</h2>
+        <h2>{props.title}</h2>
         <ul>
-
-           {photos}
-            <NotFound />
+            { photos.length ? photos :  <NotFound />}
+          
+            
         </ul>
       </div>
     )

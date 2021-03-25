@@ -2,6 +2,7 @@ body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   color: #3f4850;
+  background-image: linear-gradient(to right top, #b5b5b5, #a1c7e5, #4fe3f1, #55f9bc, #ccfd5f);
 }
 
 h2 {
@@ -23,6 +24,8 @@ a {
   max-width: 460px;
   display: flex;
   margin: 0 auto 32px;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 4px 6px 50px 1px rgba(0,0,0,0.16); 
+  box-shadow: 0px 10px 13px -7px #000000, 4px 6px 50px 1px rgba(0,0,0,0.16);
 }
 
 .search-form button {
@@ -30,7 +33,7 @@ a {
   background-color: #438bbd;
   border: none;
   padding: 0px 15px;
-  border-radius: 0 0.35em 0.35em 0;
+  
   cursor: pointer;
 }
 
@@ -41,7 +44,7 @@ input {
   padding: 10px 15px;
   border: 3px solid #d7dbdf;
   border-right: none;
-  border-radius: 0.35em 0 0 0.35em;
+ 
   outline: none;
 }
 
@@ -53,7 +56,7 @@ input {
 .main-nav a {
   display: block;
   background: #438bbd;
-  border-radius: 3px;
+  
   padding: 5px;
   color: #fff;
 }
@@ -63,6 +66,8 @@ input {
 .search-form button:hover {
   background-color: #275270;
 }
+
+
 
 .photo-container ul {
   display: flex;
@@ -76,7 +81,9 @@ input {
   width: 220px;
   height: 165px;
   overflow: hidden;
-  margin-bottom: 15px;
+  -webkit-box-shadow: 5px 5px 18px 1px rgba(0,0,0,0.44); 
+  box-shadow: 5px 5px 18px 1px rgba(0,0,0,0.44);
+  
 }
 
 .photo-container ul img {

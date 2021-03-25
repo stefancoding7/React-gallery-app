@@ -3,15 +3,21 @@ import { withRouter } from 'react-router-dom';
 
 class Form extends Component {
 
-    
+    state = {
+        searched: ''
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.search(this.query.value);
         let searchUrl = this.query.value;
-        let path = `${searchUrl}`;
+        let path = `/search/${searchUrl}`;
+
         this.props.history.push(path);
         
+        this.setState({
+            searched: this.query.value
+        })
     }
 
     render() {
