@@ -10,8 +10,7 @@ import Loading from './components/Loading';
 import {
   BrowserRouter,
   Route,
-  Switch,
-  useHistory,
+  Switch
 } from 'react-router-dom';
 
 
@@ -20,7 +19,6 @@ class App extends Component {
     state = {
       data: [],
       title: '',
-     
       loading: true,
       cats: [],
       dogs: [],
@@ -29,6 +27,7 @@ class App extends Component {
 
     componentDidMount() {
       this.searchApi()
+      
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
           this.setState({ 
@@ -63,7 +62,11 @@ class App extends Component {
       });
     }
     
-    
+    resetLoading = () => {
+      this.setState({
+        loading: true
+      })
+    }
 
     searchApi = (query = 'cats') => {
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
@@ -88,20 +91,20 @@ class App extends Component {
         return (
           <BrowserRouter>
               <div className="container-fluid">
-              <Form search={this.searchApi}/>
+              <Form search={this.searchApi} resetLoading={this.resetLoading}/>
               <Nav  search={this.props.search}/>
               <Switch>
                 {
-                  (this.state.loading) ? <Loading /> :  <Route exact path="/" render={ () => <Photo data={this.state.data}/> } />
+                  (this.state.loading) ? <Loading /> : <Route exact path="/" render={ () => <Photo data={this.state.data} /> } />
                 }
                
                 {
-                  (this.state.loading) ? <Loading /> : <Route path="/search/:urlquery" render={() => <Photo data={this.state.data} title={this.state.title}/>  } />
+                  (this.state.loading) ? <Loading /> : <Route path="/search/:urlquery" render={() => <Photo data={this.state.data} title={this.state.title} search={this.searchApi} />  } />
                 }
                 
                 
-                <Route exact path="/cats" render={() => <Photo data={this.state.cats} title={'Cats'}/> } />
-                <Route exact path="/dogs" render={() => <Photo data={this.state.dogs} title={'Dogs'}/> } />
+                <Route exact path="/cats" render={() => <Photo data={this.state.cats} title={'Cats'} /> } />
+                <Route exact path="/dogs" render={() => <Photo data={this.state.dogs} title={'Dogs'} /> } />
                 <Route exact path="/computers" render={() => <Photo data={this.state.computers} title={'Computers'}/> } />
                 <Route component={Error404} />
                
