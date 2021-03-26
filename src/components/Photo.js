@@ -47,4 +47,4 @@ class Photo extends Component {
   
 }
 
-export default Photo;
+export default withRouter(Photo);
