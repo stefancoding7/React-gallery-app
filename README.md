@@ -8,7 +8,7 @@ This image gallery app has been made with popular frame work React. This app usi
 <ul>
     <li>Search for any images provided API</li>
     <li>Use 3 categories for quicker search using link navigation</li>
-    <li>Borwser history working with forward and back navigation</li>
+    <li>Borwser history working with forward and back navigations</li>
 </ul>
 
 # How to use it
@@ -21,10 +21,12 @@ This image gallery app has been made with popular frame work React. This app usi
     export default apiKey;
 ```
 
+# Styles (Exceeds)
 
-
-
-
+1. Removed border radius from buttons and images
+2. Changed backgorund to linear
+3. Added shadows on elements
+4. Changed images size for mobile devices 
 
 # Getting Started with Create React App
 

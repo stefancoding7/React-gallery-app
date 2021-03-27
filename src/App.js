@@ -145,10 +145,10 @@ class App extends Component {
                 <Route component={Error404} />
                
               </Switch>
-
               </div>
           </BrowserRouter>
-  
+        
+            
         )
     }
 }
