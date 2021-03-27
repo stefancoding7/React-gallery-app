@@ -72,12 +72,14 @@ input {
 .photo-container ul {
   display: flex;
   flex-flow: row wrap;
+  margin:  10px;
   justify-content: space-between;
   -ms-align-items: flex-start;
   align-items: flex-start;
 }
 
 .photo-container ul li {
+  margin:  10px;
   width: 220px;
   height: 165px;
   overflow: hidden;
