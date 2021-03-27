@@ -4,15 +4,23 @@ import { withRouter } from 'react-router-dom';
 class Form extends Component {
 
    
-
+    /**
+     * handleSubmit function
+     * save query.value to searchUrl than call with searchApi function
+     * save current path to path variable and push valirable to histroy object
+     */
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.search(this.query.value);
-        let searchUrl = this.query.value;
-        let path = `/search/${searchUrl}`;
-
-        this.props.history.push(path);
         this.props.resetLoading();
+        let searchUrl = this.query.value;
+       
+        this.props.search(searchUrl);
+        let path = `/search/${searchUrl}`;
+        
+        this.props.history.push(path);
+       
+       
+       
         e.currentTarget.reset();
     }
 

@@ -16,6 +16,17 @@ import {
 
 class App extends Component {
 
+    /**
+   * State objects
+   *
+   * @property {object} data - api data object from searched items
+   * @property {string} title - searched value
+   * @property {boolean} loading - loading indicator (if true loading starting)
+   * @property {object} cats - api data object for cats items
+   * @property {object} dogs - api data object for dogs items
+   * @property {object} computers - api data object for computer items
+   *
+   */
     state = {
       data: [],
       title: '',
@@ -25,6 +36,10 @@ class App extends Component {
       computers: [],
     }
 
+
+    //get data from api
+    // this.searchApi - call function to get data for page load 
+    // than get cats, dogs and computers objects for links
     componentDidMount() {
       this.searchApi()
       
@@ -36,7 +51,7 @@ class App extends Component {
          
       })
       .catch(error => {
-        console.log('Error fetching and parsing data', error);
+        console.log('Error fetching: ', error);
       });
 
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`)
@@ -47,7 +62,7 @@ class App extends Component {
          
       })
       .catch(error => {
-        console.log('Error fetching and parsing data', error);
+        console.log('Error fetching: ', error);
       });
 
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=computers&per_page=24&format=json&nojsoncallback=1`)
@@ -58,16 +73,26 @@ class App extends Component {
          
       })
       .catch(error => {
-        console.log('Error fetching and parsing data', error);
+        console.log('Error fetching: ', error);
       });
     }
     
+
+    //function to set loading back to true
     resetLoading = () => {
       this.setState({
         loading: true
       })
     }
 
+
+    /** search by query
+    * @param {string} query - Searched value ( default is cats) 
+    * 
+    * set data propterty response photos
+    * set title to searched query
+    * set loading to false when images rendered
+    */ 
     searchApi = (query = 'cats') => {
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
         .then(response => {
@@ -79,7 +104,7 @@ class App extends Component {
             
         })
         .catch(error => {
-          console.log('Error fetching and parsing data', error);
+          console.log('Error fetching: ', error);
         });
 
        
@@ -91,32 +116,39 @@ class App extends Component {
         return (
           <BrowserRouter>
               <div className="container-fluid">
+              {
+                /**
+                * Call <Form /> class and pass the searchApi function to make avaliable search for  From class
+                * Call <Nav /> to show links
+                * <Switch/> for 404 error handler
+                * 
+                */
+              }
               <Form search={this.searchApi} resetLoading={this.resetLoading}/>
-              <Nav  search={this.props.search}/>
+              <Nav />
               <Switch>
+              { /* if loading is true than show <Loading /> component than render <Photo /> component */ }
                 {
                   (this.state.loading) ? <Loading /> : <Route exact path="/" render={ () => <Photo data={this.state.data} /> } />
                 }
-               
-                {
-                  (this.state.loading) ? <Loading /> : <Route path="/search/:urlquery" render={() => <Photo data={this.state.data} title={this.state.title} search={this.searchApi} />  } />
-                }
-                
-                
+                { /* This routes for cats, dogs and computers, pass state objects to <Photo /> component */ }
                 <Route exact path="/cats" render={() => <Photo data={this.state.cats} title={'Cats'} /> } />
                 <Route exact path="/dogs" render={() => <Photo data={this.state.dogs} title={'Dogs'} /> } />
                 <Route exact path="/computers" render={() => <Photo data={this.state.computers} title={'Computers'}/> } />
+
+                { /* if loading is true than show <Loading /> component than render <Photo /> component.  */ }
+                {
+                  (this.state.loading) ? <Loading /> : <Route path="/search/:urlquery" render={() => <Photo data={this.state.data} title={this.state.title} search={this.searchApi} />  } />
+                }
+
+                {/** if rout is not found then render Error404 component */}
                 <Route component={Error404} />
                
               </Switch>
-               
-               
-              
-                
+
               </div>
           </BrowserRouter>
-        
-            
+  
         )
     }
 }

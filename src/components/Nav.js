@@ -12,7 +12,6 @@ return (
         <li><NavLink to='/dogs'>Dogs</NavLink></li>
         <li><NavLink to='/computers'>Computers</NavLink></li>
       
-        
       </ul>
     </nav> 
 
