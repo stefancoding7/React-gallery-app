@@ -1,3 +1,31 @@
+# React gallery app
+
+This image gallery app has been made with popular frame work React. This app using 
+ https://www.flickr.com/ for fetching API. 
+
+# Features
+
+<ul>
+    <li>Search for any images provided API</li>
+    <li>Use 3 categories for quicker search using link navigation</li>
+    <li>Borwser history working with forward and back navigation</li>
+</ul>
+
+# How to use it
+
+1. Create config.js in `/src` folder
+2. Add your private api key in to config.js (This api key you could get from <a href="https://www.flickr.com/services/apps/create/apply/">flickr.com</a>)
+
+```javascript
+    const apiKey = 'YOUR API KEY';
+    export default apiKey;
+```
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
